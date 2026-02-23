@@ -4,7 +4,7 @@ import { useAgentStore, CustomLLMConfig } from '../../stores/agentStore';
 import { useTranslation, LANGUAGES } from '../../i18n';
 
 // LLM Provider type
-export type LLMProvider = 'openai' | 'anthropic' | 'deepseek' | 'ollama' | 'custom';
+export type LLMProvider = 'openai' | 'anthropic' | 'deepseek' | 'minimax' | 'zhipu' | 'ollama' | 'custom';
 
 // Re-export for backward compatibility
 export type SavedConfig = CustomLLMConfig;
@@ -12,19 +12,23 @@ export type SavedConfig = CustomLLMConfig;
 // Model options for each provider
 export const MODEL_OPTIONS: Record<LLMProvider, string[]> = {
   openai: ['gpt-4o', 'gpt-4o-mini', 'gpt-4-turbo', 'gpt-3.5-turbo'],
-  anthropic: ['claude-3-5-sonnet', 'claude-3-opus', 'claude-3-haiku'],
+  anthropic: ['claude-sonnet-4-20250514', 'claude-3-5-sonnet-20241022', 'claude-3-opus-20240229', 'claude-3-haiku-20240307'],
   deepseek: ['deepseek-chat', 'deepseek-coder'],
-  ollama: ['llama2', 'mistral', 'codellama', 'phi3'],
+  minimax: ['abab6.5sab6.5-chat', 'abg-chat', 'abab5.5s-chat'],
+  zhipu: ['glm-4', 'glm-4-flash', 'glm-4-plus', 'glm-3-turbo'],
+  ollama: ['llama3', 'llama3.1', 'mistral', 'qwen2.5'],
   custom: ['custom'],
 };
 
 // Provider display names
 export const PROVIDER_NAMES: Record<LLMProvider, string> = {
   openai: 'OpenAI',
-  anthropic: 'Claude (Anthropic)',
+  anthropic: 'Anthropic (Claude)',
   deepseek: 'DeepSeek',
-  ollama: 'Ollama (Local)',
-  custom: 'Custom',
+  minimax: 'MiniMax',
+  zhipu: '智谱 GLM',
+  ollama: 'Ollama (本地)',
+  custom: 'Custom (自定义)',
 };
 
 interface SettingsPanelProps {
