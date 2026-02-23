@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
-import { HolographicPanel, HoloButton, StatItem } from './HolographicPanel';
-import { useAgentStore } from '../stores/agentStore';
-import { Agent, LLM_PROVIDERS, LLM_MODELS, AgentStatus } from '../types';
-import { useTranslation } from '../i18n';
+import { HolographicPanel, HoloButton, StatItem } from '../common/HolographicPanel';
+import { useAgentStore } from '../../stores/agentStore';
+import { Agent, LLM_PROVIDERS, LLM_MODELS, AgentStatus } from '../../types';
+import { useTranslation } from '../../i18n';
 
 interface AgentPanelProps {
   position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center';

@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import { HolographicPanel, HoloButton } from './HolographicPanel';
-import { useAgentStore } from '../stores/agentStore';
-import { FormationType, DEFAULT_FORMATIONS } from '../types';
-import { useTranslation } from '../i18n';
+import { HolographicPanel, HoloButton } from '../common/HolographicPanel';
+import { useAgentStore } from '../../stores/agentStore';
+import { FormationType, DEFAULT_FORMATIONS } from '../../types';
+import { useTranslation } from '../../i18n';
 
 interface FormationOption {
   type: FormationType;

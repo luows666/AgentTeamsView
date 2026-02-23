@@ -1,7 +1,7 @@
 import React, { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { Agent } from '../types';
+import { Agent } from '../../types';
 
 interface HeatmapOverlayProps {
   agents: Agent[];

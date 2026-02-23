@@ -2,7 +2,7 @@ import { useRef, useState, useEffect, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Trail, Sphere } from '@react-three/drei';
 import * as THREE from 'three';
-import { Task, Agent } from '../types';
+import { Task, Agent } from '../../types';
 
 // Task particle (glowing orb) component
 export interface TaskParticleProps {

@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
-import { HolographicPanel, HoloButton } from './HolographicPanel';
-import { useAgentStore } from '../stores/agentStore';
-import { Task, TaskStatus, TaskPriority, Agent } from '../types';
-import { useTranslation } from '../i18n';
+import { HolographicPanel, HoloButton } from '../common/HolographicPanel';
+import { useAgentStore } from '../../stores/agentStore';
+import { Task, TaskStatus, TaskPriority, Agent } from '../../types';
+import { useTranslation } from '../../i18n';
 
 interface TaskCardProps {
   task: Task;

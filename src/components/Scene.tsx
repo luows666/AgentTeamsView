@@ -2,13 +2,13 @@ import { useRef, useMemo, useCallback, useEffect, useState } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { Stars, Float } from '@react-three/drei';
 import * as THREE from 'three';
-import { AgentNode, AgentNodeProps } from './AgentNode';
+import { AgentNode, AgentNodeProps } from './agent/AgentNode';
 import {
   TaskVisualizationManager,
   TaskParticle,
   TaskCompletionEffect,
-} from './TaskVisualization';
-import { HeatmapOverlay } from './HeatmapOverlay';
+} from './task/TaskVisualization';
+import { HeatmapOverlay } from './formation/HeatmapOverlay';
 import { Agent as AgentType, Task, FormationType, DEFAULT_FORMATIONS } from '../types';
 import { useAgentStore } from '../stores/agentStore';
 

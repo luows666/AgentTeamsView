@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useCallback, useState } from 'react';
-import { HolographicPanel, HoloButton } from './HolographicPanel';
-import { useAgentStore } from '../stores/agentStore';
-import { ExecutionEvent, Agent } from '../types';
-import { useTranslation } from '../i18n';
+import { HolographicPanel, HoloButton } from '../common/HolographicPanel';
+import { useAgentStore } from '../../stores/agentStore';
+import { ExecutionEvent, Agent } from '../../types';
+import { useTranslation } from '../../i18n';
 
 interface Message {
   id: string;

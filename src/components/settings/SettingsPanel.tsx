@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { HolographicPanel, HoloButton } from './HolographicPanel';
-import { useAgentStore, CustomLLMConfig } from '../stores/agentStore';
-import { useTranslation, LANGUAGES } from '../i18n';
+import { HolographicPanel, HoloButton } from '../common/HolographicPanel';
+import { useAgentStore, CustomLLMConfig } from '../../stores/agentStore';
+import { useTranslation, LANGUAGES } from '../../i18n';
 
 // LLM Provider type
 export type LLMProvider = 'openai' | 'anthropic' | 'deepseek' | 'ollama' | 'custom';
