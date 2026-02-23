@@ -1,0 +1,296 @@
+/**
+ * Holographic Theme Styles
+ * Custom CSS for the Agent Team holographic UI
+ */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* CSS Variables for Holographic Theme */
+:root {
+  --color-holo-cyan: #00f0ff;
+  --color-holo-blue: #0066ff;
+  --color-holo-purple: #8b5cf6;
+  --color-holo-green: #00ff88;
+  --color-holo-pink: #ff3366;
+  --color-holo-bg: rgba(0, 20, 40, 0.85);
+  --color-holo-bg-dark: rgba(0, 10, 30, 0.9);
+  --color-holo-border: rgba(0, 240, 255, 0.4);
+  --color-holo-text: #00f0ff;
+  --font-display: 'Orbitron', 'Rajdhani', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000810;
+  font-family: var(--font-display);
+  color: var(--color-holo-text);
+}
+
+/* Holographic Panel Base Styles */
+.holo-panel {
+  position: absolute;
+  background: linear-gradient(135deg, var(--color-holo-bg) 0%, var(--color-holo-bg-dark) 100%);
+  border: 1px solid var(--color-holo-border);
+  border-radius: 8px;
+  padding: 16px;
+  color: var(--color-holo-text);
+  font-family: var(--font-display);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 0 20px rgba(0, 240, 255, 0.2),
+    0 0 40px rgba(0, 240, 255, 0.1),
+    inset 0 0 30px rgba(0, 240, 255, 0.05);
+  overflow: hidden;
+  animation: panelFadeIn 0.5s ease-out;
+}
+
+/* Panel Animations */
+@keyframes panelFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scanLine {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(200px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes shimmer {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+  }
+}
+
+/* Corner Decorations */
+.holo-panel-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-holo-cyan);
+}
+
+.holo-panel-corner.top-left {
+  top: 0;
+  left: 0;
+  border-top: 2px solid var(--color-holo-cyan);
+  border-left: 2px solid var(--color-holo-cyan);
+  border-top-left-radius: 8px;
+  box-shadow: inset 2px 2px 4px rgba(0, 240, 255, 0.3);
+}
+
+.holo-panel-corner.top-right {
+  top: 0;
+  right: 0;
+  border-top: 2px solid var(--color-holo-cyan);
+  border-right: 2px solid var(--color-holo-cyan);
+  border-top-right-radius: 8px;
+  box-shadow: inset -2px 2px 4px rgba(0, 240, 255, 0.3);
+}
+
+.holo-panel-corner.bottom-left {
+  bottom: 0;
+  left: 0;
+  border-bottom: 2px solid var(--color-holo-cyan);
+  border-left: 2px solid var(--color-holo-cyan);
+  border-bottom-left-radius: 8px;
+  box-shadow: inset 2px -2px 4px rgba(0, 240, 255, 0.3);
+}
+
+.holo-panel-corner.bottom-right {
+  bottom: 0;
+  right: 0;
+  border-bottom: 2px solid var(--color-holo-cyan);
+  border-right: 2px solid var(--color-holo-cyan);
+  border-bottom-right-radius: 8px;
+  box-shadow: inset -2px -2px 4px rgba(0, 240, 255, 0.3);
+}
+
+/* Panel Title */
+.holo-panel-title {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+  text-shadow: 0 0 10px var(--color-holo-cyan);
+}
+
+/* Stat Item */
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+}
+
+.stat-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+
+.stat-value {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Holo Button */
+.holo-button {
+  padding: 10px 20px;
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid var(--color-holo-cyan);
+  border-radius: 4px;
+  color: var(--color-holo-cyan);
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+  text-shadow: 0 0 5px var(--color-holo-cyan);
+}
+
+.holo-button:hover {
+  background: rgba(0, 240, 255, 0.2);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+}
+
+.holo-button.secondary {
+  background: rgba(139, 92, 246, 0.1);
+  border-color: var(--color-holo-purple);
+  color: var(--color-holo-purple);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+  text-shadow: 0 0 5px var(--color-holo-purple);
+}
+
+.holo-button.secondary:hover {
+  background: rgba(139, 92, 246, 0.2);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+}
+
+.holo-button:disabled {
+  border-color: rgba(100, 100, 100, 0.3);
+  color: rgba(255, 255, 255, 0.3);
+  cursor: not-allowed;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+/* Title */
+.app-title {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--color-holo-cyan);
+  text-shadow: 0 0 20px var(--color-holo-cyan), 0 0 40px var(--color-holo-cyan);
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+/* Log text */
+.log-text {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+/* Control text */
+.control-text {
+  font-size: 11px;
+  line-height: 1.8;
+  opacity: 0.8;
+}
+
+.control-key {
+  color: var(--color-holo-cyan);
+}
+
+/* Scan Line Effect */
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-holo-cyan), transparent);
+  animation: scanLine 3s linear infinite;
+  opacity: 0.6;
+}
+
+/* Shimmer Effect */
+.holo-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 240, 255, 0.1),
+    transparent
+  );
+  animation: shimmer 3s infinite;
+  pointer-events: none;
+}
+
+/* Content wrapper */
+.holo-panel-content {
+  position: relative;
+  z-index: 1;
+}
