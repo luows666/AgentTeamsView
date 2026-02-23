@@ -80,14 +80,14 @@ export class LLMService {
 
     switch (provider) {
       case 'openai':
+      case 'deepseek':
+      case 'minimax':
+      case 'zhipu':
         headers['Authorization'] = `Bearer ${apiKey}`;
         break;
       case 'anthropic':
         headers['x-api-key'] = apiKey;
         headers['anthropic-version'] = '2023-06-01';
-        break;
-      case 'deepseek':
-        headers['Authorization'] = `Bearer ${apiKey}`;
         break;
       case 'ollama':
         // Ollama typically doesn't need auth for local
@@ -109,48 +109,47 @@ export class LLMService {
     let baseUrl = this.getEffectiveBaseUrl();
     const model = this.getEffectiveModel();
 
-    // Process baseUrl for custom provider
-    if (provider === 'custom' && baseUrl) {
-      // Ensure baseUrl has protocol
-      if (!baseUrl.startsWith('http://') && !baseUrl.startsWith('https://')) {
-        baseUrl = 'https://' + baseUrl;
+    // Helper: Check if URL already contains a path
+    const hasPath = (url: string): boolean => {
+      return url.includes('/v1/') || url.includes('/v4/') || url.includes('/chat') || url.includes('/completions') || url.includes('/messages');
+    };
+
+    // Process baseUrl with protocol
+    const processBaseUrl = (url: string): string => {
+      if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        url = 'https://' + url;
       }
+      return url.replace(/\/$/, '');
+    };
 
-      // Remove trailing slash if present
-      baseUrl = baseUrl.replace(/\/$/, '');
+    // If baseUrl is provided, check if it already has a path
+    if (baseUrl) {
+      baseUrl = processBaseUrl(baseUrl);
 
-      // Check if it's already a full URL (contains path like /v1/chat/completions)
-      // If it has a path, use as-is; otherwise add /v1/chat/completions
-      let endpoint: string;
-      if (baseUrl.includes('/v1/') || baseUrl.includes('/chat') || baseUrl.includes('/completions')) {
-        // User provided full URL with path
-        endpoint = baseUrl;
-      } else {
-        // User provided just the base URL, add path
-        endpoint = `${baseUrl}/v1/chat/completions`;
+      // If user provided full URL with path, use as-is
+      if (hasPath(baseUrl)) {
+        console.log('[LLM Service] Using user-provided endpoint:', baseUrl);
+        return baseUrl;
       }
-
-      console.log('[LLM Service] Custom provider endpoint:', {
-        originalBaseUrl: this.getEffectiveBaseUrl(),
-        processedBaseUrl: baseUrl,
-        endpoint,
-        model,
-      });
-
-      return endpoint;
     }
 
     switch (provider) {
       case 'openai':
-        return baseUrl ? `${baseUrl}/chat/completions` : 'https://api.openai.com/v1/chat/completions';
+        return baseUrl ? `${baseUrl}/v1/chat/completions` : 'https://api.openai.com/v1/chat/completions';
       case 'anthropic':
-        return baseUrl ? `${baseUrl}/messages` : 'https://api.anthropic.com/v1/messages';
+        return baseUrl ? `${baseUrl}/v1/messages` : 'https://api.anthropic.com/v1/messages';
       case 'deepseek':
-        return baseUrl ? `${baseUrl}/chat/completions` : 'https://api.deepseek.com/v1/chat/completions';
+        return baseUrl ? `${baseUrl}/v1/chat/completions` : 'https://api.deepseek.com/v1/chat/completions';
+      case 'minimax':
+        // MiniMax uses /v1/text/chatcompletion_v2
+        return baseUrl ? `${baseUrl}/v1/text/chatcompletion_v2` : 'https://api.minimax.chat/v1/text/chatcompletion_v2';
+      case 'zhipu':
+        // 智谱 GLM uses /api/paas/v4/chat/completions
+        return baseUrl ? `${baseUrl}/v4/chat/completions` : 'https://open.bigmodel.cn/api/paas/v4/chat/completions';
       case 'ollama':
         return baseUrl || 'http://localhost:11434';
       case 'custom':
-        return baseUrl ? `${baseUrl}/chat/completions` : '';
+        return baseUrl ? (hasPath(baseUrl) ? baseUrl : `${baseUrl}/v1/chat/completions`) : '';
       default:
         return '';
     }
@@ -164,6 +163,8 @@ export class LLMService {
     switch (provider) {
       case 'openai':
       case 'deepseek':
+      case 'minimax':
+      case 'zhipu':
       case 'custom':
         return {
           model,
@@ -208,6 +209,8 @@ export class LLMService {
     switch (provider) {
       case 'openai':
       case 'deepseek':
+      case 'minimax':
+      case 'zhipu':
       case 'custom':
         return {
           content: data.choices[0]?.message?.content || '',

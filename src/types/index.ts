@@ -119,15 +119,21 @@ export const DEFAULT_FORMATIONS: Record<FormationType, Position[]> = {
 // LLM Provider options
 export const LLM_PROVIDERS = [
   { value: 'openai', label: 'OpenAI' },
-  { value: 'anthropic', label: 'Anthropic' },
-  { value: 'google', label: 'Google' },
-  { value: 'local', label: 'Local/Other' },
+  { value: 'anthropic', label: 'Anthropic (Claude)' },
+  { value: 'deepseek', label: 'DeepSeek' },
+  { value: 'minimax', label: 'MiniMax' },
+  { value: 'zhipu', label: '智谱 GLM' },
+  { value: 'ollama', label: 'Ollama (本地)' },
+  { value: 'custom', label: 'Custom (自定义)' },
 ] as const;
 
 // LLM Model options by provider
 export const LLM_MODELS: Record<string, string[]> = {
   openai: ['gpt-4o', 'gpt-4o-mini', 'gpt-4-turbo', 'gpt-3.5-turbo'],
-  anthropic: ['claude-3-5-sonnet', 'claude-3-opus', 'claude-3-haiku'],
-  google: ['gemini-1.5-pro', 'gemini-1.5-flash'],
-  local: ['llama3', 'mistral', 'custom'],
+  anthropic: ['claude-sonnet-4-20250514', 'claude-3-5-sonnet-20241022', 'claude-3-opus-20240229', 'claude-3-haiku-20240307'],
+  deepseek: ['deepseek-chat', 'deepseek-coder'],
+  minimax: ['abab6.5sab6.5-chat', 'abg-chat', 'abab5.5s-chat'],
+  zhipu: ['glm-4', 'glm-4-flash', 'glm-4-plus', 'glm-3-turbo'],
+  ollama: ['llama3', 'llama3.1', 'mistral', 'qwen2.5', 'custom'],
+  custom: [],
 };

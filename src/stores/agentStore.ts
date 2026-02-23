@@ -16,7 +16,7 @@ import { LLMService, createLLMService } from '../services/llmService';
 const STORAGE_KEY = 'agent-team-data';
 
 // Settings types
-export type LLMProvider = 'openai' | 'anthropic' | 'deepseek' | 'ollama' | 'custom';
+export type LLMProvider = 'openai' | 'anthropic' | 'deepseek' | 'minimax' | 'zhipu' | 'ollama' | 'custom';
 
 // Custom configuration for agents
 export interface CustomLLMConfig {
